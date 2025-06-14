@@ -27,13 +27,13 @@ func main() {
 		fmt.Scanln(&pilihan)
 
 		if pilihan == "1" {
-			jumlahPakaian = tambahPakaian(daftarPakaian, jumlahPakaian)
+			jumlahPakaian = tambahPakaian(&daftarPakaian, jumlahPakaian)
 		} else if pilihan == "2" {
 			tampilkanDaftarPakaian(daftarPakaian, jumlahPakaian)
 		} else if pilihan == "3" {
 			cariPakaian(daftarPakaian, jumlahPakaian)
 		} else if pilihan == "4" {
-			urutkanPakaian(daftarPakaian, jumlahPakaian)
+			urutkanPakaian(&daftarPakaian, jumlahPakaian)
 		} else if pilihan == "5" {
 			rekomendasiOutfit(daftarPakaian, jumlahPakaian)
 		} else if pilihan == "0" || pilihan == "keluar" {
@@ -57,9 +57,9 @@ func tampilkanMenu() {
 }
 
 // Function untuk menambahkan pakaian ke dalam daftar
-// Parameter: array pakaian dan jumlah pakaian saat ini
+// Parameter: pointer array pakaian dan jumlah pakaian saat ini
 // Return: jumlah pakaian setelah penambahan
-func tambahPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) int {
+func tambahPakaian(daftarPakaian *[MAX_PAKAIAN]Pakaian, jumlahPakaian int) int {
 	var p Pakaian
 
 	if jumlahPakaian >= MAX_PAKAIAN {
@@ -152,7 +152,7 @@ func cariPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
 	}
 
 	kriteria, nilai := inputKriteriaPencarian()
-	jumlahHasil = pencarianPakaian(daftarPakaian, jumlahPakaian, kriteria, nilai, hasil)
+	jumlahHasil = pencarianPakaian(daftarPakaian, jumlahPakaian, kriteria, nilai, &hasil)
 	tampilkanHasilPencarian(hasil, jumlahHasil)
 }
 
@@ -161,18 +161,18 @@ func cariPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
 func inputKriteriaPencarian() (string, string) {
 	var berdasarkan, nilai string
 
-	fmt.Print("Cari berdasarkan (warna/kategori): ")
+	fmt.Print("Cari berdasarkan (warna): ")
 	fmt.Scanln(&berdasarkan)
-	fmt.Print("Masukkan nilai: ")
+	fmt.Print("Masukkan nilai (berdasarkan tingkat Formalitas): ")
 	fmt.Scanln(&nilai)
 
 	return berdasarkan, nilai
 }
 
 // Function untuk melakukan pencarian pakaian (Algoritma Sequential Search)
-// Parameter: array pakaian, jumlah pakaian, kriteria, nilai, dan array hasil
+// Parameter: array pakaian, jumlah pakaian, kriteria, nilai, dan pointer array hasil
 // Return: jumlah pakaian yang ditemukan
-func pencarianPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int, kriteria string, nilai string, hasil [MAX_PAKAIAN]Pakaian) int {
+func pencarianPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int, kriteria string, nilai string, hasil *[MAX_PAKAIAN]Pakaian) int {
 	var jumlahHasil int
 	var i int
 
@@ -206,8 +206,8 @@ func tampilkanHasilPencarian(hasil [MAX_PAKAIAN]Pakaian, jumlahHasil int) {
 }
 
 // Procedure untuk mengurutkan pakaian berdasarkan tingkat formalitas (Selection Sort)
-// Parameter: array pakaian dan jumlah pakaian
-func urutkanPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
+// Parameter: pointer array pakaian dan jumlah pakaian
+func urutkanPakaian(daftarPakaian *[MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
 	if jumlahPakaian <= 1 {
 		fmt.Println("Tidak cukup pakaian untuk diurutkan")
 		return
@@ -220,8 +220,8 @@ func urutkanPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
 }
 
 // Procedure untuk implementasi Selection Sort
-// Parameter: array pakaian dan jumlah pakaian
-func selectionSort(pakaian [MAX_PAKAIAN]Pakaian, n int) {
+// Parameter: pointer array pakaian dan jumlah pakaian
+func selectionSort(pakaian *[MAX_PAKAIAN]Pakaian, n int) {
 	var i, j, minIdx int
 
 	for i = 0; i < n-1; i = i + 1 {
@@ -252,7 +252,7 @@ func rekomendasiOutfit(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
 		return
 	}
 
-	jumlahAtas, jumlahBawah = pisahkanKategoriPakaian(daftarPakaian, jumlahPakaian, atas, bawah)
+	jumlahAtas, jumlahBawah = pisahkanKategoriPakaian(daftarPakaian, jumlahPakaian, &atas, &bawah)
 
 	if jumlahAtas == 0 || jumlahBawah == 0 {
 		fmt.Println("Tidak cukup pakaian untuk membuat rekomendasi")
@@ -263,16 +263,16 @@ func rekomendasiOutfit(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int) {
 }
 
 // Function untuk memisahkan pakaian berdasarkan kategori atas dan bawah
-// Parameter: array pakaian lengkap, jumlah pakaian, array atas, array bawah
+// Parameter: array pakaian lengkap, jumlah pakaian, pointer array atas, pointer array bawah
 // Return: jumlah pakaian atas dan jumlah pakaian bawah
-func pisahkanKategoriPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int, atas [MAX_PAKAIAN]Pakaian, bawah [MAX_PAKAIAN]Pakaian) (int, int) {
+func pisahkanKategoriPakaian(daftarPakaian [MAX_PAKAIAN]Pakaian, jumlahPakaian int, atas *[MAX_PAKAIAN]Pakaian, bawah *[MAX_PAKAIAN]Pakaian) (int, int) {
 	var jumlahAtas, jumlahBawah int
 	var i int
 
 	jumlahAtas = 0
 	jumlahBawah = 0
 
-	for i = 0; i < jumlahPakaian; i = i + 1 {
+	for i = 0; i < jumlahPakaian; i++ {
 		p := daftarPakaian[i]
 		if strings.ToLower(p.Kategori) == "atas" {
 			atas[jumlahAtas] = p
@@ -296,7 +296,7 @@ func tampilkanRekomendasi(atas [MAX_PAKAIAN]Pakaian, bawah [MAX_PAKAIAN]Pakaian,
 
 	maksimalRekomendasi = hitungMaksimalRekomendasi(jumlahAtas, jumlahBawah)
 
-	for i = 0; i < maksimalRekomendasi; i = i + 1 {
+	for i = 0; i < maksimalRekomendasi; i++ {
 		fmt.Printf("%d. %s (%s) dengan %s (%s)\n",
 			i+1, atas[i].Tipe, atas[i].Warna, bawah[i].Tipe, bawah[i].Warna)
 	}
