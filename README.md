@@ -21,8 +21,6 @@ A simple command-line interface (CLI) application written in Go that helps users
 
 ### 1. **Selection Sort** 🔄
 - **Purpose**: Sort clothing items by formality level (1-5)
-- **Time Complexity**: O(n²)
-- **Space Complexity**: O(1)
 - **Implementation**: selectionSort() function
 - **How it works**: 
   - Finds the minimum element and swaps it with the first element
@@ -31,8 +29,6 @@ A simple command-line interface (CLI) application written in Go that helps users
 
 ### 2. **Sequential Search (Linear Search)** 🔍
 - **Purpose**: Search clothing items by color or category
-- **Time Complexity**: O(n)
-- **Space Complexity**: O(1)
 - **Implementation**: pencarianPakaian() function
 - **How it works**:
   - Iterates through each item in the wardrobe
@@ -41,8 +37,6 @@ A simple command-line interface (CLI) application written in Go that helps users
 
 ### 3. **Simple Matching Algorithm** 🤖
 - **Purpose**: Generate outfit recommendations by pairing tops with bottoms
-- **Time Complexity**: O(n)
-- **Space Complexity**: O(n)
 - **Implementation**: pisahkanKategoriPakaian() and tampilkanRekomendasi() functions
 - **How it works**:
   - Separates clothing into categories (tops vs bottoms)
@@ -67,7 +61,6 @@ cd ai-fashion-stylist
 go run main.go
 
 ## 🧑‍💻 Usage
-
 
 === AI Fashion Stylist ===
 1. Tambah Pakaian
@@ -109,10 +102,3 @@ type Pakaian struct {
 - **Selection Sort**: Chosen for its simplicity and in-place sorting capability, suitable for small datasets
 - **Sequential Search**: Implemented to handle unsorted data and find multiple matches
 - **Array-based Storage**: Uses fixed arrays for predictable memory usage and simple indexing
-
-## 🚀 Future Improvements
-
-- Implement more efficient sorting algorithms (Quick Sort, Merge Sort)
-- Add Binary Search for sorted data
-- Enhance matching algorithm with color coordination logic
-- Add more sophisticated recommendation system based on style compatibility
