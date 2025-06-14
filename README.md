@@ -12,21 +12,63 @@ A simple command-line interface (CLI) application written in Go that helps users
 
 ## 🧵 Categories
 
-- 'atas' – top wear (e.g., shirts, blouses)
-- 'bawah' – bottom wear (e.g., pants, skirts)
-- 'luar' – outerwear (e.g., jackets, coats)
-- 'aksesoris' – accessories (e.g., belts, watches)
+-  atas – top wear (e.g., shirts, blouses)
+-  bawah – bottom wear (e.g., pants, skirts)
+-  luar – outerwear (e.g., jackets, coats)
+-  aksesoris – accessories (e.g., belts, watches)
+
+## 🧮 Algorithms Used
+
+### 1. **Selection Sort** 🔄
+- **Purpose**: Sort clothing items by formality level (1-5)
+- **Time Complexity**: O(n²)
+- **Space Complexity**: O(1)
+- **Implementation**: selectionSort() function
+- **How it works**: 
+  - Finds the minimum element and swaps it with the first element
+  - Repeats for the remaining unsorted portion
+  - Sorts in ascending order of formality
+
+### 2. **Sequential Search (Linear Search)** 🔍
+- **Purpose**: Search clothing items by color or category
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(1)
+- **Implementation**: pencarianPakaian() function
+- **How it works**:
+  - Iterates through each item in the wardrobe
+  - Compares search criteria with item properties
+  - Returns all matching items
+
+### 3. **Simple Matching Algorithm** 🤖
+- **Purpose**: Generate outfit recommendations by pairing tops with bottoms
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+- **Implementation**: pisahkanKategoriPakaian() and tampilkanRekomendasi() functions
+- **How it works**:
+  - Separates clothing into categories (tops vs bottoms)
+  - Creates combinations by pairing items sequentially
+  - Limits recommendations to maximum of 3 outfits
+
+### Algorithm Performance Summary
+
+| Algorithm | Type | Best Case | Average Case | Worst Case | Space | Use Case |
+|-----------|------|-----------|--------------|------------|-------|----------|
+| Selection Sort | Sorting | O(n²) | O(n²) | O(n²) | O(1) | Organizing by formality |
+| Sequential Search | Searching | O(1) | O(n) | O(n) | O(1) | Finding specific items |
+| Simple Matching | Matching | O(n) | O(n) | O(n) | O(n) | Outfit recommendations |
 
 ## 📦 Installation
 
 Make sure you have Go installed on your system. Then:
 
-```bash```
+bash
 git clone https://github.com/your-username/ai-fashion-stylist.git
 cd ai-fashion-stylist
 go run main.go
 
-🧑‍💻Usage
+## 🧑‍💻 Usage
+
+
 === AI Fashion Stylist ===
 1. Tambah Pakaian
 2. Lihat Daftar Pakaian
@@ -36,11 +78,41 @@ go run main.go
 0. Keluar
 
 
-🔧 Tech Stack
-- Go (Golang) – Core language for building the CLI app
-- Standard libraries only (no third-party packages)
+## 🔧 Tech Stack
 
-🛠 Sample Workflow
-Add a few clothing items (top and bottom)
-Use the "Rekomendasi Outfit" menu to get suggested outfit combinations
-Sort your wardrobe based on formality to organize looks for events
+- **Go (Golang)** – Core language for building the CLI app
+- **Standard libraries only** (no third-party packages)
+- **Built-in algorithms** for sorting and searching operations
+
+## 🛠 Sample Workflow
+
+1. Add a few clothing items (top and bottom)
+2. Use the "Rekomendasi Outfit" menu to get suggested outfit combinations
+3. Sort your wardrobe based on formality to organize looks for events
+4. Search for specific items by color or category when planning outfits
+
+## 📊 Data Structure
+
+The application uses a fixed-size array ([MAX_PAKAIAN]Pakaian) to store up to 100 clothing items, where each item contains:
+
+go
+type Pakaian struct {
+    Tipe              string  // Type of clothing
+    Kategori          string  // Category (atas/bawah/luar/aksesoris)
+    Warna             string  // Color
+    tingkatFormalitas int     // Formality level (1-5)
+}
+
+
+## 🎯 Algorithm Design Choices
+
+- **Selection Sort**: Chosen for its simplicity and in-place sorting capability, suitable for small datasets
+- **Sequential Search**: Implemented to handle unsorted data and find multiple matches
+- **Array-based Storage**: Uses fixed arrays for predictable memory usage and simple indexing
+
+## 🚀 Future Improvements
+
+- Implement more efficient sorting algorithms (Quick Sort, Merge Sort)
+- Add Binary Search for sorted data
+- Enhance matching algorithm with color coordination logic
+- Add more sophisticated recommendation system based on style compatibility
