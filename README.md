@@ -43,14 +43,6 @@ A simple command-line interface (CLI) application written in Go that helps users
   - Creates combinations by pairing items sequentially
   - Limits recommendations to maximum of 3 outfits
 
-### Algorithm Performance Summary
-
-| Algorithm | Type | Best Case | Average Case | Worst Case | Space | Use Case |
-|-----------|------|-----------|--------------|------------|-------|----------|
-| Selection Sort | Sorting | O(n²) | O(n²) | O(n²) | O(1) | Organizing by formality |
-| Sequential Search | Searching | O(1) | O(n) | O(n) | O(1) | Finding specific items |
-| Simple Matching | Matching | O(n) | O(n) | O(n) | O(n) | Outfit recommendations |
-
 ## 📦 Installation
 
 Make sure you have Go installed on your system. Then:
